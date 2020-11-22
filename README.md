@@ -1,2 +1,2 @@
 # garlic-creator
-Tiny SMIL Authoring Software for Digital Signage
+Tiny SMIL Authoring for Digital Signage
