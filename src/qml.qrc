@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>index.smil.tpl</file>
+        <file>icons/audio.png</file>
+        <file>icons/html5.png</file>
+        <file>icons/video.png</file>
+        <file>icons/web.png</file>
+        <file>SaveDialog.qml</file>
+        <file>UriDialog.qml</file>
+        <file>MediaDialog.qml</file>
+        <file>DragListViewItems.qml</file>
+    </qresource>
+</RCC>
