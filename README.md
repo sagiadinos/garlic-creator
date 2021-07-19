@@ -13,5 +13,6 @@ You will found [SMIL 3.0](https://www.w3.org/TR/SMIL3/) compatible player at:
 
 - [IAdea](https://www.iadea.com/)
 - [QBic](https://www.qbictechnology.com/)
-- [German Digital Signage Vendor](https://www.digital-signage.de/)
-- [Digital Signage Open Source Player](https://www.garlic-player.com/)
+- [digital-signage.de (vendor)](https://www.digital-signage.de/)
+- [aio-player.de (vendor)](https://www.aio-player.de/)
+- [Open Source Digital Signage Player](https://garlic-player.com/)
