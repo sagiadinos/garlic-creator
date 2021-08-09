@@ -11,4 +11,5 @@
         <seq repeatCount="indefinite">
 {INSERT_ELEMENTS}
         </seq>
+     </body>
 </smil>
