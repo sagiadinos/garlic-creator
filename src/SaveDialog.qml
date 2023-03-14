@@ -23,7 +23,8 @@ FolderDialog
 {
     id: selectFolderDialog
     title: qsTr("Choose a folder")
-    folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation);
+    folder: StandardPaths.writableLocation(StandardPaths.DesktopLocation)
+    options: FolderDialog.ShowDirsOnly;
 
     onAccepted:
     {
