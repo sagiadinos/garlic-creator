@@ -22,12 +22,76 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
 import com.sagiadinos.garlic.creator.filesystem 1.0
+import com.sagiadinos.garlic.creator.restclient 1.0
 
 ApplicationWindow
 {
     id: root
     visible: true
     width: 640; height: 480
+    property string token: ""
+    header: ToolBar
+    {
+        RowLayout
+        {
+            TextField
+            {
+                id: playerIP
+                horizontalAlignment: TextInput.AlignLeft
+                placeholderText: qsTr("Enter Player IP")
+                width: 10
+                validator: RegExpValidator{regExp: /^(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\.){3}([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))$/}
+                selectByMouse: true
+            }
+            ToolButton
+            {
+                text: qsTr("Connect")
+                onClicked:
+                {
+                    determineToken();//restClient.determineToken(playerIP.text);
+                }
+                function determineToken()
+                {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://" + playerIP.text + ":8080/v2/oauth2/token";
+                    var params = "grant_type=password&username=admin&password=";
+
+                    xmlhttp.onreadystatechange=function()
+                    {
+                        if (xmlhttp.readyState == 4)
+                        {
+                            if (xmlhttp.status == 200)
+                            {
+                                var obj = JSON.parse(xmlhttp.responseText);
+                                root.token = obj.access_token;
+                                playerIP.color = "green";
+                            }
+                            else
+                            {
+                                root.token = "";
+                                playerIP.color = "red";
+                            }
+                         }
+                    }
+                    xmlhttp.open("POST", url, true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xmlhttp.setRequestHeader("Content-length", params.length);
+                    xmlhttp.setRequestHeader("Connection", "close");
+                    xmlhttp.send(params);
+                }
+
+            }
+            ToolButton
+            {
+                text: qsTr("Send SMIL")
+                onClicked:
+                {
+                    determineToken();//restClient.determineToken(playerIP.text);
+                }
+            }
+        }
+
+    }
     footer: ToolBar
     {
         RowLayout
@@ -56,6 +120,7 @@ ApplicationWindow
     }
     SaveDialog        {id: selectFolderDialog}
     FileSystem        {id: fileSystem}
+    RestClient        {id: restClient}
     UriDialog         {id: addUriDialog}
     MediaDialog       {id: addFileDialog}
     DragListViewItems {id: dragListViewItems}

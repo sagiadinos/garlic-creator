@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         filesystem.cpp \
-        main.cpp
+        main.cpp \
+        restclient.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,7 +37,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    filesystem.h
+    filesystem.h \
+    restclient.h
 OTHER_FILES += \
     DragListViewItems.qml \
     MediaDialog.qml \
