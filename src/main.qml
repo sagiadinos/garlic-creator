@@ -41,11 +41,13 @@ ApplicationWindow
                 placeholderText: qsTr("Enter Player IP")
                 width: 10
                 validator: RegExpValidator{regExp: /^(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\.){3}([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))$/}
+                text: "192.168.1.102"
                 selectByMouse: true
             }
             ToolButton
             {
-                text: qsTr("Connect")
+                id: btConnect
+                text: qsTr("connect")
                 onClicked:
                 {
                     determineToken();//restClient.determineToken(playerIP.text);
@@ -55,7 +57,7 @@ ApplicationWindow
                     var xmlhttp = new XMLHttpRequest();
                     var url = "http://" + playerIP.text + ":8080/v2/oauth2/token";
                     var params = "grant_type=password&username=admin&password=";
-
+                    btConnect.text = qsTr("trying …");
                     xmlhttp.onreadystatechange=function()
                     {
                         if (xmlhttp.readyState == 4)
@@ -65,13 +67,16 @@ ApplicationWindow
                                 var obj = JSON.parse(xmlhttp.responseText);
                                 root.token = obj.access_token;
                                 playerIP.color = "green";
+                                sendSmilData.enabled = true;
                             }
                             else
                             {
                                 root.token = "";
                                 playerIP.color = "red";
+                                sendSmilData.enabled = false;
                             }
-                         }
+                            btConnect.text = qsTr("connect");
+                        }
                     }
                     xmlhttp.open("POST", url, true);
                     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -83,10 +88,56 @@ ApplicationWindow
             }
             ToolButton
             {
-                text: qsTr("Send SMIL")
+                id: sendSmilData
+                text: qsTr("send SMIL")
+                enabled: false;
                 onClicked:
                 {
-                    determineToken();//restClient.determineToken(playerIP.text);
+                    restClient.setToken(root.token);
+                    restClient.setIP(playerIP.text);
+                    var smil_content = "";
+                    for(var i = 0; i < playlistModel.count; i++)
+                    {
+                        var str = playlistModel.get(i).file_url;
+                        if (playlistModel.get(i).file_type != "webseite")
+                            restClient.addMediaQueue(playlistModel.get(i).file_url);
+
+                        var file_name = str.slice(str.lastIndexOf("/")+1);
+
+                        // write smil content with relative media directory path
+                        var smil_tag = "";
+                        var dur      = "";
+                        if (playlistModel.get(i).duration > 0)
+                        {
+                            dur = 'dur="' + playlistModel.get(i).duration +'s"'
+                        }
+
+                        switch (playlistModel.get(i).file_type)
+                        {
+                            case "image":
+                                 smil_tag = "\t\t\t" + '<img src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                break;
+                            case "video":
+                                smil_tag = "\t\t\t" + '<video src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                break;
+                            case "audio":
+                                smil_tag = "\t\t\t" + '<audio src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                break;
+                            case "webwidget":
+                                smil_tag = "\t\t\t" + '<ref src="/user-data/media/' + file_name + '" ' + dur + ' type="application/widget" />' + "\n"
+                                break;
+                            case "website":
+                                smil_tag = "\t\t\t" + '<ref src="/user-data/media/' + str + '" ' + dur + ' type="text/html" />' + "\n"
+                                break;
+
+                        }
+                        smil_content += smil_tag;
+                    }
+                    var path = StandardPaths.writableLocation(StandardPaths.DesktopLocation);
+                    fileSystem.createIndexSmil(path + "/index.smil", smil_content);
+                    restClient.addMediaQueue(path + "/index.smil");
+                    restClient.sendMedia();
+                    restClient.play();
                 }
             }
         }
@@ -142,7 +193,6 @@ ApplicationWindow
        spacing: 4
        cacheBuffer: 50
    }
-
 
     ListModel
     {

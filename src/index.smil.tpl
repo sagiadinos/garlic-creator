@@ -2,6 +2,7 @@
 <smil>
     <head>
         <meta name="title" content="{TITLE}" />
+        <meta name="generator" content="garlic-creator" />
         <layout>
             <root-layout id="display:0" width="1920" height="1080" />
             <region regionName="screen" top="0" left="0" width="1920" height="1080" z-index="0" background-color="transparent" />
