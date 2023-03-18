@@ -99,7 +99,7 @@ ApplicationWindow
                     for(var i = 0; i < playlistModel.count; i++)
                     {
                         var str = playlistModel.get(i).file_url;
-                        if (playlistModel.get(i).file_type != "webseite")
+                        if (playlistModel.get(i).file_type != "website")
                             restClient.addMediaQueue(playlistModel.get(i).file_url);
 
                         var file_name = str.slice(str.lastIndexOf("/")+1);
