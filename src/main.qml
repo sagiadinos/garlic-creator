@@ -162,11 +162,11 @@ ApplicationWindow
               text: qsTr("Export Playlist")
               onClicked: selectFolderDialog.open()
           }
-          ToolButton
+/*          ToolButton
           {
               text: qsTr("Options")
           }
-       }
+*/       }
     }
     SaveDialog        {id: selectFolderDialog}
     FileSystem        {id: fileSystem}
