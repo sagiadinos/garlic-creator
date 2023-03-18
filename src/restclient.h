@@ -23,7 +23,6 @@ public:
     Q_INVOKABLE void determineToken(QString ip);
     Q_INVOKABLE void addMediaQueue(QString file_path);
     Q_INVOKABLE void sendMedia();
-    Q_INVOKABLE void play();
     Q_INVOKABLE void setToken(QString t);
     Q_INVOKABLE void setIP(QString i);
 
@@ -34,6 +33,7 @@ private:
     QDateTime expire_date;
     QScopedPointer <QNetworkAccessManager>  manager_token, manager_media, manager_play;
     QQueue<QFileInfo> MediaQueue;
+    void play();
 private slots:
     void finishedTokenRequest(QNetworkReply *reply);
     void finishedMediaUpload(QNetworkReply *reply);

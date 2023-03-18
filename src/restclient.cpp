@@ -76,9 +76,9 @@ void RestClient::play()
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QJsonObject obj;
-    obj["uri"] = "http://" + ip + ":8080/v2/user-data/index.smil";
-    obj["packageName"] = "com.iadea.player.SmilActivity";
-    obj["className"] = "com.iadea.player";
+    obj["uri"] = "http://localhost:8080/v2/user-data/media/index.smil";
+    obj["className"] = "com.iadea.player.SmilActivity";
+    obj["packageName"] = "com.iadea.player";
     QJsonDocument doc(obj);
     QByteArray post_data = doc.toJson();
 
@@ -117,5 +117,8 @@ void RestClient::finishedMediaUpload(QNetworkReply *reply)
     if (reply->error())
         qDebug() << reply->readAll();
 
-    sendMedia();
+    if (!MediaQueue.empty())
+        sendMedia();
+    else
+        play();
 }

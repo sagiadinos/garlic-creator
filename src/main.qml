@@ -115,19 +115,19 @@ ApplicationWindow
                         switch (playlistModel.get(i).file_type)
                         {
                             case "image":
-                                 smil_tag = "\t\t\t" + '<img src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                 smil_tag = "\t\t\t" + '<img src="' + file_name + '" ' + dur + ' />' + "\n"
                                 break;
                             case "video":
-                                smil_tag = "\t\t\t" + '<video src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                smil_tag = "\t\t\t" + '<video src="' + file_name + '" ' + dur + ' />' + "\n"
                                 break;
                             case "audio":
-                                smil_tag = "\t\t\t" + '<audio src="/user-data/media/' + file_name + '" ' + dur + ' />' + "\n"
+                                smil_tag = "\t\t\t" + '<audio src="' + file_name + '" ' + dur + ' />' + "\n"
                                 break;
                             case "webwidget":
-                                smil_tag = "\t\t\t" + '<ref src="/user-data/media/' + file_name + '" ' + dur + ' type="application/widget" />' + "\n"
+                                smil_tag = "\t\t\t" + '<ref src="' + file_name + '" ' + dur + ' type="application/widget" />' + "\n"
                                 break;
                             case "website":
-                                smil_tag = "\t\t\t" + '<ref src="/user-data/media/' + str + '" ' + dur + ' type="text/html" />' + "\n"
+                                smil_tag = "\t\t\t" + '<ref src="' + str + '" ' + dur + ' type="text/html" />' + "\n"
                                 break;
 
                         }
@@ -137,7 +137,6 @@ ApplicationWindow
                     fileSystem.createIndexSmil(path + "/index.smil", smil_content);
                     restClient.addMediaQueue(path + "/index.smil");
                     restClient.sendMedia();
-                    restClient.play();
                 }
             }
         }
