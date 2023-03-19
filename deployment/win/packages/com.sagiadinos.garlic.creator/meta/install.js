@@ -26,12 +26,12 @@ Component.prototype.createOperations = function()
 
     if (systemInfo.productType === "windows")
 	{
-        component.addOperation("CreateShortcut", "@TargetDir@/start_garlic.bat", "@StartMenuDir@/garlic-creator.lnk",
-            "workingDirectory=@TargetDir@",
+        component.addOperation("CreateShortcut", "@TargetDir@/bin/garlic-creator.exe", "@StartMenuDir@/garlic-creator.lnk",
+            "workingDirectory=@TargetDir@/bin",
 			"iconPath=@TargetDir@/bin/garlic-creator.ico"
         );
-        component.addOperation("CreateShortcut", "@TargetDir@/start_garlic.bat", "@DesktopDir@/garlic-creator.lnk",
-            "workingDirectory=@TargetDir@",
+        component.addOperation("CreateShortcut", "@TargetDir@/bin/garlic-creator.exe", "@DesktopDir@/garlic-creator.lnk",
+            "workingDirectory=@TargetDir@/bin",
 			"iconPath=@TargetDir@/bin/garlic-creator.ico"
         );
     }

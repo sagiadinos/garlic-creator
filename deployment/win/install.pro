@@ -5,8 +5,8 @@ INSTALLER = garlic_install
 INPUT = $$PWD/config/config.xml $$PWD/packages
 garlicinstall.input = INPUT
 garlicinstall.output = $$INSTALLER
-unix:garlicinstall.commands = /home/niko/Anwendungen/Qt/Tools/QtInstallerFramework/4.5/bin/binarycreator -c $$PWD/config/config.xml -p $$PWD/packages ${QMAKE_FILE_OUT}
-win32:garlicinstall.commands = C:\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator -c $$PWD\config\config.xml -p $$PWD\packages ${QMAKE_FILE_OUT}
+unix:garlicinstall.commands = /home/niko/Anwendungen/Qt/Tools/QtInstallerFramework/4.4/bin/binarycreator -c $$PWD/config/config.xml -p $$PWD/packages ${QMAKE_FILE_OUT}
+win32:garlicinstall.commands = C:\Qt\Tools\QtInstallerFramework\4.4\bin\binarycreator -c $$PWD\config\config.xml -p $$PWD\packages ${QMAKE_FILE_OUT}
 garlicinstall.CONFIG += target_predeps no_link combine
 
 QMAKE_EXTRA_COMPILERS += garlicinstall
