@@ -66,7 +66,7 @@ void FileSystem::createIndexSmil(QString destination, QString content)
 
 QString FileSystem::readFile(QString file_path)
 {
-    QFile file(cleanFilePath(file_path));
+    QFile file(file_path);
 
     if(!file.open(QIODevice::ReadOnly))
     {
@@ -85,9 +85,15 @@ QString FileSystem::readFile(QString file_path)
 
 QString FileSystem::cleanFilePath(QString file_path)
 {
+#ifdef Q_OS_WIN
+    if (file_path.indexOf("file:///") != -1)
+    {
+        return file_path.mid(8);
+    }
+#else
     if (file_path.indexOf("file://") != -1)
     {
-        file_path = file_path.mid(7);
+        return file_path.mid(7);
     }
-    return file_path;
+#endif
 }

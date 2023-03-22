@@ -22,7 +22,11 @@ void RestClient::determineToken(QString i)
 
 void RestClient::addMediaQueue(QString file_path)
 {
+#ifdef Q_OS_WIN
+    QFileInfo fi(file_path.mid(8));
+#else
     QFileInfo fi(file_path.mid(7));
+#endif
     if (!fi.exists())
         return;
     MediaQueue.enqueue(fi);
