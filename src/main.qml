@@ -42,7 +42,7 @@ ApplicationWindow
                 width: 10
                 validator: RegExpValidator{regExp: /^(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\.){3}([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))$/}
                 selectByMouse: true
-                text: "192.168.1.106"
+              //  text: "192.168.1.106"
             }
             ToolButton
             {
