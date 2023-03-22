@@ -42,6 +42,7 @@ ApplicationWindow
                 width: 10
                 validator: RegExpValidator{regExp: /^(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\.){3}([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))$/}
                 selectByMouse: true
+                text: "192.168.1.106"
             }
             ToolButton
             {
@@ -132,7 +133,7 @@ ApplicationWindow
                         }
                         smil_content += smil_tag;
                     }
-                    var path = StandardPaths.writableLocation(StandardPaths.DesktopLocation);
+                    var path = StandardPaths.writableLocation(StandardPaths.CacheLocation);
                     fileSystem.createIndexSmil(path + "/index.smil", smil_content);
                     restClient.addMediaQueue(path + "/index.smil");
                     restClient.sendMedia();
