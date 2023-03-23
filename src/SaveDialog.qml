@@ -51,19 +51,19 @@ FolderDialog
            switch (playlistModel.get(i).file_type)
            {
                case "image":
-                    smil_tag = "\t\t\t" + '<img src="./media/' + file_name + '" ' + dur + ' />' + "\n"
+                    smil_tag = "\t\t\t" + '<img src="./media/' + file_name + '" ' + dur + ' fit="meet" width="100%" />' + "\n"
                    break;
                case "video":
-                   smil_tag = "\t\t\t" + '<video src="./media/' + file_name + '" ' + dur + ' />' + "\n"
+                   smil_tag = "\t\t\t" + '<video src="./media/' + file_name + '" ' + dur + ' fit="meet" width="100%" />' + "\n"
                    break;
                case "audio":
                    smil_tag = "\t\t\t" + '<audio src="./media/' + file_name + '" ' + dur + ' />' + "\n"
                    break;
                case "webwidget":
-                   smil_tag = "\t\t\t" + '<ref src="./media/' + file_name + '" ' + dur + ' type="application/widget" />' + "\n"
+                   smil_tag = "\t\t\t" + '<ref src="./media/' + file_name + '" ' + dur + ' type="application/widget" fit="meet" width="100%" />' + "\n"
                    break;
                case "website":
-                   smil_tag = "\t\t\t" + '<ref src="./media/' + str + '" ' + dur + ' type="text/html" />' + "\n"
+                   smil_tag = "\t\t\t" + '<ref src="./media/' + str + '" ' + dur + ' type="text/html" fit="meet" width="100%" />' + "\n"
                    break;
 
            }

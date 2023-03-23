@@ -42,7 +42,7 @@ ApplicationWindow
                 width: 10
                 validator: RegExpValidator{regExp: /^(([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))\.){3}([01]?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))$/}
                 selectByMouse: true
-              //  text: "192.168.1.106"
+           //     text: "192.168.1.102"
             }
             ToolButton
             {
@@ -115,19 +115,19 @@ ApplicationWindow
                         switch (playlistModel.get(i).file_type)
                         {
                             case "image":
-                                 smil_tag = "\t\t\t" + '<img src="' + file_name + '" ' + dur + ' />' + "\n"
+                                 smil_tag = "\t\t\t" + '<img src="' + file_name + '" ' + dur + ' fit="meet" width="100%" mediaAlign="center" />' + "\n"
                                 break;
                             case "video":
-                                smil_tag = "\t\t\t" + '<video src="' + file_name + '" ' + dur + ' />' + "\n"
+                                smil_tag = "\t\t\t" + '<video src="' + file_name + '" ' + dur + ' fit="meet" width="100%" />' + "\n"
                                 break;
                             case "audio":
                                 smil_tag = "\t\t\t" + '<audio src="' + file_name + '" ' + dur + ' />' + "\n"
                                 break;
                             case "webwidget":
-                                smil_tag = "\t\t\t" + '<ref src="' + file_name + '" ' + dur + ' type="application/widget" />' + "\n"
+                                smil_tag = "\t\t\t" + '<ref src="' + file_name + '" ' + dur + ' type="application/widget" fit="meet" width="100%" />' + "\n"
                                 break;
                             case "website":
-                                smil_tag = "\t\t\t" + '<ref src="' + str + '" ' + dur + ' type="text/html" />' + "\n"
+                                smil_tag = "\t\t\t" + '<ref src="' + str + '" ' + dur + ' type="text/html" fit="meet" />' + "\n"
                                 break;
 
                         }
