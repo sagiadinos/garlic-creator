@@ -50,7 +50,6 @@ void FileSystem::copyFile(QString source, QString destination)
 void FileSystem::createIndexSmil(QString destination, QString content)
 {
     QFile file(cleanFilePath(destination));
-    QRegExp regExp( "{INSERT_ELEMENTS}", Qt::CaseInsensitive, QRegExp::RegExp );
     QString tpl = readFile(QStringLiteral(":/index.smil.tpl"));
     if (tpl.contains("{INSERT_ELEMENTS}"))
     {
