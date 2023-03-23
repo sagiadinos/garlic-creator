@@ -19,6 +19,7 @@ import QtQuick 2.0
 import QtQml 2.12
 import QtQuick.Controls 2.12
 import QtQml.Models 2.12
+import QtQuick.Layouts 1.12
 
 Component
 {
@@ -46,7 +47,7 @@ Component
                 horizontalCenter: parent.horizontalCenter
                 verticalCenter: parent.verticalCenter
             }
-            width: dragArea.width; height: column.implicitHeight + 4
+            width: dragArea.width; height: item_entry.implicitHeight + 4
 
 
             border.width: 1
@@ -72,9 +73,9 @@ Component
                 }
             }
 
-            Row
+            RowLayout
             {
-                id: column
+                id: item_entry
                 anchors { fill: parent; margins: 2 }
                 spacing: 1
                 Rectangle
@@ -96,12 +97,30 @@ Component
                         source: thumbnail_url
                     }
                 }
-                Column
+                ColumnLayout
                 {
-                    Text
+                    id:item_properties
+                    RowLayout
                     {
-                      font.pixelSize: 10
-                      text: file_url
+                        id: rowLayout
+                        Text
+                        {
+                            Layout.fillWidth: true
+                            text: file_url
+                            height:40
+                            clip: true
+                        }
+                        RoundButton
+                        {
+                            id:deleteItem
+                            text: "x"
+                            hoverEnabled: true
+                            ToolTip.delay: 1000
+                            ToolTip.timeout: 5000
+                            ToolTip.visible: hovered
+                            ToolTip.text: qsTr("Delete item")
+                            onClicked: playlistModel.remove(index)
+                        }
                     }
                     Row
                     {
@@ -112,8 +131,13 @@ Component
                           to:99999
                           editable: true;
                           anchors.verticalCenter: parent.verticalCenter
-                          font.pixelSize: 20
                           value: duration
+                          hoverEnabled: true
+                          ToolTip.delay: 1000
+                          ToolTip.timeout: 5000
+                          ToolTip.visible: hovered
+                          ToolTip.text: qsTr("Duration in seconds - 0 means native media duration (e.g video)")
+                          onValueModified: playlistModel.setProperty(index, "duration", durationItem.value)
                         }
                         Text
                         {
